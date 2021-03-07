@@ -1,0 +1,58 @@
+Rows = int(input("Enter number of rows :\n"))
+Seats = int(input("Enter number of seats :\n"))
+print("1 For Show the Seats\n2 For Buy a ticket \n3 For Statistics", "\n4 For Show Booked ticket user info\n0 For exit")
+x=int(input("Select option - \n"))
+Seat_booked = 0
+Prize_of_ticket = 0 
+Total_income = 0 
+Total_seats = Rows*Seats
+Percentage = (Seat_booked/Total_seats)*100
+
+def Sitting_arrangment():
+    seating_chart = {}
+    for i in range(Rows):        
+        seat_in_row = {}
+        for j in range(Seats):
+            seat_in_row[str(j+1)] = "S"
+        seating_chart[str(i)] = seat_in_row    
+    return seating_chart
+    
+chart = Sitting_arrangment()
+if x == 1:
+    for label in chart.keys():
+        print(int(label)+1, end="  ")
+        for seating_plan in chart[label].values():
+            print(seating_plan, end = "  ")
+        print()
+elif x==2:
+    row_num = int(input("Enter Row number :\n"))
+    col_num = int(input("Enter column number : \n"))
+    if row_num in range(Rows) and col_num in range(Seats):
+        if Rows*Seats <=60:
+            Prize_of_ticket = 10
+        elif  row_num <= int(Rows/2):
+            Prize_of_ticket = 10
+        else:
+            Prize_of_ticket = 8
+        print("prize of ticket ","$",Prize_of_ticket)
+        booking_status = input("y for confirm booking and n for cancel booking")
+
+        if booking_status =="y":
+             person_detail["Name"]= input("Enter Name - ")
+             person_detail["Gender"]= input("Enter Gender - ")
+             person_detail["Age"]= input("Enter Age - ")
+             person_detail["contact_num"]= input("Enter Contact Number - ")
+             person_detail["Ticket_prize"]= Prize_of_ticket
+             table_of_chart[str(row_number-1)][str(column_number-1)] = "B"
+             Seat_booked += 1
+             Total_income += Prize_of_ticket
+        else:    
+            print("***Booked Succesful***")
+    else:
+        print("Seat already booked")
+elif  x==3:
+    print("Number of purchased Ticket - ",Seat_booked)
+    print("Percentage - ",Percentage)
+    print("Curent Income - ","$",Prize_of_ticket)
+    print("Total income - ","$",Total_income)
+    print()
